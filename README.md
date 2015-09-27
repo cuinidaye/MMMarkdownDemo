@@ -32,8 +32,3 @@ NSString *htmlString = [MMMarkdown HTMLStringWithMarkdown:markdown extensions:MM
 
 ##（三）注意事项
 `MMMarkdown`这个库好像不能解析代码片段，就是说解析不了这个[```](https://github.com/cuinidaye/MMMarkdownDemo)符号，但是我们将要做的项目好像也不需要解析代码，就这么着吧。
-
-
-*   Red
-*   Green
-*   Blue
