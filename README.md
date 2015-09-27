@@ -1,4 +1,4 @@
->前言：MMMarkdown是一个可以将Markdown文本解析成HTML的Objective-C框架，它的使用环境是OS X 10.6+ 和 iOS 8.0+。MMMarkdown的Github页面在[这里](https://github.com/mdiep/MMMarkdown)。我自己写了一个Demo,也放在了Github上，[MMMarkdownDemo](https://github.com/cuinidaye/MMMarkdownDemo)。
+>前言：MMMarkdown是一个可以将Markdown文本解析成HTML的Objective-C框架，它的使用环境是OS X 10.6+ 和 iOS 8.0+。MMMarkdown的Github页面在[这里](https://github.com/mdiep/MMMarkdown)。
 
 ##（一）安装
 1，
@@ -22,13 +22,32 @@ NSString *htmlString = [MMMarkdown HTMLStringWithMarkdown:markdown error:&error]
 // Returns @"<h1>Example</h1>\n<p>What a library!</p>"
 ```
 
-另外，`MMMarkdown`也支持很多扩展，这些扩展我也没有一一去尝试，大家可以自己去试一下：
+##（三）MMMarkdown扩展
+另外，`MMMarkdown`也支持很多扩展:
+
+>  MMMarkdownExtensionsNone
+>  MMMarkdownExtensionsAutolinkedURLs
+>  MMMarkdownExtensionsFencedCodeBlocks
+>  MMMarkdownExtensionsHardNewlines
+>  MMMarkdownExtensionsStrikethroughs
+>  MMMarkdownExtensionsTables
+>  MMMarkdownExtensionsUnderscoresInWords
+>  MMMarkdownExtensionsGitHubFlavored
+
+其中：
+```
+MMMarkdownExtensionsGitHubFlavored = MMMarkdownExtensionsAutolinkedURLs
+                                        |MMMarkdownExtensionsFencedCodeBlocks
+                                        |MMMarkdownExtensionsHardNewlines
+                                        |MMMarkdownExtensionsStrikethroughs
+                                        |MMMarkdownExtensionsTables
+                                        |MMMarkdownExtensionsUnderscoresInWords,
+```
+
+默认的扩展是`None`,但是使用这个扩展是解析不了代码片段的，若是需要解析代码片段，可以使用`MMMarkdownExtensionsFencedCodeBlocks`，或者直接使用`MMMarkdownExtensionsGitHubFlavored`。代码如下：
 
 ```
 NSString *markdown   = @"~~Mistaken~~";
 NSString *htmlString = [MMMarkdown HTMLStringWithMarkdown:markdown extensions:MMMarkdownExtensionsGitHubFlavored error:NULL];
 // Returns @"<p><del>Mistaken</del></p>"
 ```
-
-##（三）注意事项
-`MMMarkdown`这个库好像不能解析代码片段，就是说解析不了这个[```](https://github.com/cuinidaye/MMMarkdownDemo)符号，但是我们将要做的项目好像也不需要解析代码，就这么着吧。
